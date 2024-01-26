@@ -16,6 +16,11 @@ app.get('/tasks', (req, res) => {
   res.json(tasks);
 });
 
+// Get all issues
+app.get('/issues', (req, res) => {
+  res.json(tasks);
+});
+
 // Get a specific task
 app.get('/tasks/:id', (req, res) => {
   const taskId = parseInt(req.params.id);
@@ -58,6 +63,7 @@ app.delete('/tasks/:id', (req, res) => {
   res.sendStatus(204);
 });
 
+//Este es un bug
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
