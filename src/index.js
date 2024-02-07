@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const TaskRepository = require("./taskRepository");
 const app = express();
 const port = 3000;
 
@@ -13,13 +13,14 @@ let tasks = [
 
 // Get all tasks
 app.get('/tasks', (req, res) => {
+  const tasks = TaskRepository.getAll()
   res.json(tasks);
 });
 
 // Get a specific task
 app.get('/tasks/:id', (req, res) => {
   const taskId = parseInt(req.params.id);
-  const task = tasks.find((t) => t.id === taskId);
+  const task = TaskRepository.getById(taskId);
 
   if (task) {
     res.json(task);
@@ -31,8 +32,7 @@ app.get('/tasks/:id', (req, res) => {
 // Create a new task
 app.post('/tasks', (req, res) => {
   const newTask = req.body;
-  newTask.id = tasks.length + 1;
-  tasks.push(newTask);
+  TaskRepository.createTask(newTask);
   res.status(201).json(newTask);
 });
 
@@ -40,7 +40,7 @@ app.post('/tasks', (req, res) => {
 app.put('/tasks/:id', (req, res) => {
   const taskId = parseInt(req.params.id);
   const updatedTask = req.body;
-  const index = tasks.findIndex((t) => t.id === taskId);
+  const index = TaskRepository.updateTask(taskId, updatedTask);
 
   if (index !== -1) {
     tasks[index] = { ...tasks[index], ...updatedTask };
@@ -53,8 +53,8 @@ app.put('/tasks/:id', (req, res) => {
 // Delete a task
 app.delete('/tasks/:id', (req, res) => {
   const taskId = parseInt(req.params.id);
-  tasks = tasks.filter((t) => t.id !== taskId);
-  res.sendStatus(204);
+  tasks = TaskRepository.deleteTask(taskId);
+    res.sendStatus(204);
 });
 
 app.listen(port, () => {
