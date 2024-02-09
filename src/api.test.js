@@ -22,6 +22,7 @@ test('POST /tasks', async () => {
 test('PUT /tasks', async () => {
     const response = await request(app).put('/tasks/1')
     .send({id: 1, title: 'title', description: 'description'});
+
     expect(response.status).toBe(200);
     expect(response.body.title).toBe('title');
 });
