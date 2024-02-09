@@ -1,7 +1,6 @@
-const app = require("./api");
-
+const app = require('./api');
 const port = 3000;
 
 app.listen(port, ()=>{
-  //console.log("app running");
+  // console.log("app running");
 });
