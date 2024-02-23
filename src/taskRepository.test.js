@@ -11,7 +11,7 @@ describe("pruebas", () => {
 
     // Assert
     expect(tasks.length).toBe(2);
-    expect(tasks.length == 2).toBe(true);
+    expect(tasks.length == 2).toBe(false);
     expect(typeof task == "array");
   });
 
