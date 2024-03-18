@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "dc109c52-3240-4993-a391-2af9e46d5461"
+      }
+    },
+    "android": {
+      "package": "com.jesusurias.practica1"
+    }
+  }
+}
